@@ -1,0 +1,15 @@
+{
+  "generator-jhipster": {
+    "adminPassword": "admin",
+    "appsFolders": ["eduGestGateway", "eduGestMicroservice"],
+    "clusteredDbApps": [],
+    "deploymentType": "docker-compose",
+    "directoryPath": "../",
+    "dockerRepositoryName": "EduGest",
+    "gatewayType": "SpringCloudGateway",
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "MjdmOTQ2YWVhZjk0ODgxNzdjY2I3MzE0NTFlOTBjMDE2YTgwZGFmMjcwMmVmYzAzYjYxYjAwMzBhNTQ1ZTVlZTZkNDI3N2M3NDQ1MjFiNmVjOGExZjZjYTgzZTZkNmVhNTk5Yw==",
+    "monitoring": "no",
+    "serviceDiscoveryType": "consul"
+  }
+}

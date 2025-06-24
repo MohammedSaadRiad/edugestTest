@@ -1,0 +1,67 @@
+{
+  "annotations": {
+    "changelogDate": "20250624003332"
+  },
+  "applications": ["eduGestGateway", "eduGestMicroservice"],
+  "clientRootFolder": "eduGestMicroservice",
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "identifier",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "birthDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "qualification",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "Genders",
+      "fieldValues": "MALE,FEMALE"
+    },
+    {
+      "fieldName": "experience",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    }
+  ],
+  "microserviceName": "eduGestMicroservice",
+  "name": "Teacher",
+  "relationships": [
+    {
+      "otherEntityName": "subject",
+      "otherEntityRelationshipName": "teachers",
+      "relationshipName": "subjects",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "schoolClass",
+      "otherEntityRelationshipName": "teachers",
+      "relationshipName": "schoolClasses",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

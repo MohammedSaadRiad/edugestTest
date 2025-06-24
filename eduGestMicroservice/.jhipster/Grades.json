@@ -1,0 +1,31 @@
+{
+  "annotations": {
+    "changelogDate": "20250624004232"
+  },
+  "applications": ["eduGestGateway", "eduGestMicroservice"],
+  "clientRootFolder": "eduGestMicroservice",
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "grade",
+      "fieldType": "Double"
+    }
+  ],
+  "microserviceName": "eduGestMicroservice",
+  "name": "Grades",
+  "relationships": [
+    {
+      "otherEntityName": "student",
+      "relationshipName": "student",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "subject",
+      "relationshipName": "subject",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

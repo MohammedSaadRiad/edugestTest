@@ -1,0 +1,67 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (parent(); as parentRef) {
+      <div>
+        <h2 data-cy="parentDetailsHeading">
+          <span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceParent.detail.title">Parent</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ parentRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceParent.identifier">Identifier</span></dt>
+          <dd>
+            <span>{{ parentRef.identifier }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceParent.birthDate">Birth Date</span></dt>
+          <dd>
+            <span>{{ parentRef.birthDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceParent.gender">Gender</span></dt>
+          <dd>
+            <span [jhiTranslate]="'eduGestMicroserviceApp.Genders.' + (parentRef.gender ?? 'null')">{{
+              { null: '', MALE: 'MALE', FEMALE: 'FEMALE' }[parentRef.gender ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceParent.phoneNumber">Phone Number</span></dt>
+          <dd>
+            <span>{{ parentRef.phoneNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceParent.address">Address</span></dt>
+          <dd>
+            <span>{{ parentRef.address }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceParent.note">Note</span></dt>
+          <dd>
+            <span>{{ parentRef.note }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceParent.students">Students</span></dt>
+          <dd>
+            @for (students of parentRef.students; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/edugestmicroservice/student', students.id, 'view']">{{ students?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/edugestmicroservice/parent', parentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

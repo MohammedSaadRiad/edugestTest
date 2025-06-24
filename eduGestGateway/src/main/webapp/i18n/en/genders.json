@@ -1,0 +1,9 @@
+{
+  "eduGestGatewayApp": {
+    "Genders": {
+      "null": "",
+      "MALE": "MALE",
+      "FEMALE": "FEMALE"
+    }
+  }
+}

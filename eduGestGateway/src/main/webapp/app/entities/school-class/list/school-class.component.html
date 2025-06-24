@@ -1,0 +1,133 @@
+<div>
+  <h2 id="page-heading" data-cy="SchoolClassHeading">
+    <span jhiTranslate="eduGestGatewayApp.schoolClass.home.title">School Classes</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="eduGestGatewayApp.schoolClass.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-school-class"
+        [routerLink]="['/school-class/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="eduGestGatewayApp.schoolClass.home.createLabel">Create a new School Class</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (schoolClasses().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="eduGestGatewayApp.schoolClass.home.notFound">No School Classes found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="name">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.schoolClass.name">Name</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="year">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.schoolClass.year">Year</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="timetable.id">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.schoolClass.timetable">Timetable</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="teachers.id">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.schoolClass.teachers">Teachers</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="subjects.id">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.schoolClass.subjects">Subjects</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (schoolClass of schoolClasses(); track trackId(schoolClass)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/school-class', schoolClass.id, 'view']">{{ schoolClass.id }}</a>
+              </td>
+              <td>{{ schoolClass.name }}</td>
+              <td>{{ schoolClass.year }}</td>
+              <td>
+                @if (schoolClass.timetable) {
+                  <div>
+                    <a [routerLink]="['/timetable', schoolClass.timetable.id, 'view']">{{ schoolClass.timetable.id }}</a>
+                  </div>
+                }
+              </td>
+              <td>
+                @for (teachers of schoolClass.teachers; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/teacher', teachers.id, 'view']">{{ teachers.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @for (subjects of schoolClass.subjects; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/subject', subjects.id, 'view']">{{ subjects.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/school-class', schoolClass.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/school-class', schoolClass.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(schoolClass)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

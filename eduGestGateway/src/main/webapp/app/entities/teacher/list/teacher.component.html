@@ -1,0 +1,178 @@
+<div>
+  <h2 id="page-heading" data-cy="TeacherHeading">
+    <span jhiTranslate="eduGestGatewayApp.teacher.home.title">Teachers</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="eduGestGatewayApp.teacher.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-teacher"
+        [routerLink]="['/teacher/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="eduGestGatewayApp.teacher.home.createLabel">Create a new Teacher</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (teachers().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="eduGestGatewayApp.teacher.home.notFound">No Teachers found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="identifier">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.teacher.identifier">Identifier</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="birthDate">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.teacher.birthDate">Birth Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="qualification">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.teacher.qualification">Qualification</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="gender">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.teacher.gender">Gender</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="experience">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.teacher.experience">Experience</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phoneNumber">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.teacher.phoneNumber">Phone Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="address">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.teacher.address">Address</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="type">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.teacher.type">Type</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="note">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.teacher.note">Note</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="subjects.id">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.teacher.subjects">Subjects</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="schoolClasses.id">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.teacher.schoolClasses">School Classes</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (teacher of teachers(); track trackId(teacher)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/teacher', teacher.id, 'view']">{{ teacher.id }}</a>
+              </td>
+              <td>{{ teacher.identifier }}</td>
+              <td>{{ teacher.birthDate | formatMediumDate }}</td>
+              <td>{{ teacher.qualification }}</td>
+              <td [jhiTranslate]="'eduGestGatewayApp.Genders.' + (teacher.gender ?? 'null')">
+                {{ { null: '', MALE: 'MALE', FEMALE: 'FEMALE' }[teacher.gender ?? 'null'] }}
+              </td>
+              <td>{{ teacher.experience }}</td>
+              <td>{{ teacher.phoneNumber }}</td>
+              <td>{{ teacher.address }}</td>
+              <td>{{ teacher.type }}</td>
+              <td>{{ teacher.note }}</td>
+              <td>
+                @for (subjects of teacher.subjects; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/subject', subjects.id, 'view']">{{ subjects.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td>
+                @for (schoolClasses of teacher.schoolClasses; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/school-class', schoolClasses.id, 'view']">{{ schoolClasses.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/teacher', teacher.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/teacher', teacher.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(teacher)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

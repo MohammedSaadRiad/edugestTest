@@ -1,0 +1,77 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (student(); as studentRef) {
+      <div>
+        <h2 data-cy="studentDetailsHeading"><span jhiTranslate="eduGestGatewayApp.student.detail.title">Student</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ studentRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.student.identifier">Identifier</span></dt>
+          <dd>
+            <span>{{ studentRef.identifier }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.student.birthDate">Birth Date</span></dt>
+          <dd>
+            <span>{{ studentRef.birthDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.student.gender">Gender</span></dt>
+          <dd>
+            <span [jhiTranslate]="'eduGestGatewayApp.Genders.' + (studentRef.gender ?? 'null')">{{
+              { null: '', MALE: 'MALE', FEMALE: 'FEMALE' }[studentRef.gender ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.student.nationality">Nationality</span></dt>
+          <dd>
+            <span>{{ studentRef.nationality }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.student.phoneNumber">Phone Number</span></dt>
+          <dd>
+            <span>{{ studentRef.phoneNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.student.address">Address</span></dt>
+          <dd>
+            <span>{{ studentRef.address }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.student.note">Note</span></dt>
+          <dd>
+            <span>{{ studentRef.note }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.student.schoolClass">School Class</span></dt>
+          <dd>
+            @if (student()!.schoolClass) {
+              <div>
+                <a [routerLink]="['/school-class', student()!.schoolClass?.id, 'view']">{{ studentRef.schoolClass?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.student.parents">Parents</span></dt>
+          <dd>
+            @for (parents of studentRef.parents; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/parent', parents.id, 'view']">{{ parents?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/student', studentRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

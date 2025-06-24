@@ -1,0 +1,21 @@
+{
+  "annotations": {
+    "changelogDate": "20250624003832"
+  },
+  "applications": ["eduGestGateway", "eduGestMicroservice"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "capacity",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "Room",
+  "relationships": [],
+  "searchEngine": "no"
+}

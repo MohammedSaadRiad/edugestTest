@@ -1,0 +1,12 @@
+{
+  "generator-jhipster": {
+    "adminPassword": "admin",
+    "appsFolders": ["eduGestGateway", "eduGestMicroservice"],
+    "baseName": "workspaces",
+    "directoryPath": "./",
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "YTA5MzdlYmJlMDg2ZjQ2ZWNkYTRlMDE4ZjAxMjZlN2QwNmViNjBkZjJlY2UyMDQ4MGNlYWUwOTA1NWJjOWVmMGM3ZmY5ZjBmMzFlNzM5YmMyZTYwMDg3MzYyNTc5MWRmMzViMA==",
+    "monitoring": "no",
+    "serviceDiscoveryType": "eureka"
+  }
+}

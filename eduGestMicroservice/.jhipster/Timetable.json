@@ -1,0 +1,25 @@
+{
+  "annotations": {
+    "changelogDate": "20250624004032"
+  },
+  "applications": ["eduGestGateway", "eduGestMicroservice"],
+  "clientRootFolder": "eduGestMicroservice",
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "semestre",
+      "fieldType": "Integer"
+    }
+  ],
+  "microserviceName": "eduGestMicroservice",
+  "name": "Timetable",
+  "relationships": [
+    {
+      "otherEntityName": "session",
+      "relationshipName": "sessions",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

@@ -1,0 +1,142 @@
+
+application {
+  config {
+    baseName eduGestGateway
+    applicationType gateway
+    packageName com.edugest
+    authenticationType jwt
+    prodDatabaseType mysql
+    devDatabaseType mysql
+    clientFramework angular
+    serviceDiscoveryType eureka
+    buildTool maven
+    reactive  true
+  
+  }
+  entities *
+}
+
+application {
+  config {
+    baseName eduGestMicroservice
+    applicationType microservice
+    packageName com.edugest
+    authenticationType jwt
+    prodDatabaseType mysql
+    devDatabaseType mysql
+    clientFramework angular
+    serviceDiscoveryType eureka
+    buildTool maven
+    reactive  true
+  serverPort 8081
+  
+  }
+  entities *
+}
+
+
+
+enum Genders {
+  MALE,
+  FEMALE
+}
+entity Student {
+  identifier String required
+  birthDate LocalDate
+  gender Genders
+  nationality String
+  phoneNumber String
+  address String
+  note String
+}
+entity Teacher {
+  identifier String required
+  birthDate LocalDate
+  qualification String
+  gender Genders
+  experience Integer
+  phoneNumber String
+  address String
+  type String
+  note String
+}
+entity Parent {
+  identifier String required
+  birthDate LocalDate
+  gender Genders
+  phoneNumber String
+  address String
+  note String
+}
+entity Administration {
+  identifier String required
+  birthDate LocalDate
+  gender Genders
+  phoneNumber String
+  address String
+  type String
+  note String
+}
+entity Subject {
+  name String required
+  code String required
+  description String
+}
+entity SchoolClass {
+  name String required
+  year Integer
+}
+entity Room {
+  name String required
+  capacity Integer
+}
+entity Session {
+  day String
+  startTime String
+  endTime String
+  semester Integer
+}
+entity Timetable {
+  semestre Integer
+}
+entity Absence {
+  date LocalDate
+  justification String
+  note String
+}
+entity Grades {
+  grade Double
+}
+relationship ManyToOne {
+  Student{schoolClass} to SchoolClass,
+  Absence{student} to Student,
+  Absence{session} to Session,
+  Grades{student} to Student,
+  Grades{subject} to Subject,
+  Session{room} to Room,
+  Session{subject} to Subject,
+  Session{teacher} to Teacher,
+  Session{schoolClass} to SchoolClass
+}
+relationship OneToOne {
+  SchoolClass{timetable} to Timetable
+}
+relationship OneToMany {
+  Timetable{sessions} to Session
+}
+relationship ManyToMany {
+  Student{parents} to Parent{students},
+  Teacher{subjects} to Subject{teachers},
+  SchoolClass{teachers} to Teacher{schoolClasses},
+  Subject{schoolClasses} to SchoolClass{subjects}
+}
+
+
+deployment {
+
+deploymentType docker-compose
+dockerRepositoryName "EduGest"
+appsFolders[ eduGestGateway, eduGestMicroservice]
+
+
+}

@@ -1,0 +1,28 @@
+{
+  "eduGestGatewayApp": {
+    "schoolClass": {
+      "home": {
+        "title": "School Classes",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new School Class",
+        "createOrEditLabel": "Create or edit a School Class",
+        "notFound": "No School Classes found"
+      },
+      "created": "A new School Class is created with identifier {{ param }}",
+      "updated": "A School Class is updated with identifier {{ param }}",
+      "deleted": "A School Class is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete School Class {{ id }}?"
+      },
+      "detail": {
+        "title": "School Class"
+      },
+      "id": "ID",
+      "name": "Name",
+      "year": "Year",
+      "timetable": "Timetable",
+      "teachers": "Teachers",
+      "subjects": "Subjects"
+    }
+  }
+}

@@ -1,0 +1,60 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (subject(); as subjectRef) {
+      <div>
+        <h2 data-cy="subjectDetailsHeading"><span jhiTranslate="eduGestGatewayApp.subject.detail.title">Subject</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ subjectRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.subject.name">Name</span></dt>
+          <dd>
+            <span>{{ subjectRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.subject.code">Code</span></dt>
+          <dd>
+            <span>{{ subjectRef.code }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.subject.description">Description</span></dt>
+          <dd>
+            <span>{{ subjectRef.description }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.subject.schoolClasses">School Classes</span></dt>
+          <dd>
+            @for (schoolClasses of subjectRef.schoolClasses; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/school-class', schoolClasses.id, 'view']">{{ schoolClasses?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.subject.teachers">Teachers</span></dt>
+          <dd>
+            @for (teachers of subjectRef.teachers; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/teacher', teachers.id, 'view']">{{ teachers?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/subject', subjectRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

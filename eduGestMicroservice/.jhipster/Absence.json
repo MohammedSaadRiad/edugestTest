@@ -1,0 +1,39 @@
+{
+  "annotations": {
+    "changelogDate": "20250624004132"
+  },
+  "applications": ["eduGestGateway", "eduGestMicroservice"],
+  "clientRootFolder": "eduGestMicroservice",
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "date",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "justification",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    }
+  ],
+  "microserviceName": "eduGestMicroservice",
+  "name": "Absence",
+  "relationships": [
+    {
+      "otherEntityName": "student",
+      "relationshipName": "student",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "session",
+      "relationshipName": "session",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

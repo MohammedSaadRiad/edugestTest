@@ -1,0 +1,62 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (administration(); as administrationRef) {
+      <div>
+        <h2 data-cy="administrationDetailsHeading">
+          <span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceAdministration.detail.title">Administration</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ administrationRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceAdministration.identifier">Identifier</span></dt>
+          <dd>
+            <span>{{ administrationRef.identifier }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceAdministration.birthDate">Birth Date</span></dt>
+          <dd>
+            <span>{{ administrationRef.birthDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceAdministration.gender">Gender</span></dt>
+          <dd>
+            <span [jhiTranslate]="'eduGestMicroserviceApp.Genders.' + (administrationRef.gender ?? 'null')">{{
+              { null: '', MALE: 'MALE', FEMALE: 'FEMALE' }[administrationRef.gender ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceAdministration.phoneNumber">Phone Number</span></dt>
+          <dd>
+            <span>{{ administrationRef.phoneNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceAdministration.address">Address</span></dt>
+          <dd>
+            <span>{{ administrationRef.address }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceAdministration.type">Type</span></dt>
+          <dd>
+            <span>{{ administrationRef.type }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceAdministration.note">Note</span></dt>
+          <dd>
+            <span>{{ administrationRef.note }}</span>
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/edugestmicroservice/administration', administrationRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

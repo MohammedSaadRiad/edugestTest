@@ -1,0 +1,134 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2 id="jhi-session-heading" data-cy="SessionCreateUpdateHeading" jhiTranslate="eduGestGatewayApp.session.home.createOrEditLabel">
+        Create or edit a Session
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="eduGestGatewayApp.session.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        <div class="mb-3">
+          <label class="form-label" for="field_day" jhiTranslate="eduGestGatewayApp.session.day">Day</label>
+          <input type="text" class="form-control" name="day" id="field_day" data-cy="day" formControlName="day" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_startTime" jhiTranslate="eduGestGatewayApp.session.startTime">Start Time</label>
+          <input type="text" class="form-control" name="startTime" id="field_startTime" data-cy="startTime" formControlName="startTime" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_endTime" jhiTranslate="eduGestGatewayApp.session.endTime">End Time</label>
+          <input type="text" class="form-control" name="endTime" id="field_endTime" data-cy="endTime" formControlName="endTime" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_semester" jhiTranslate="eduGestGatewayApp.session.semester">Semester</label>
+          <input type="number" class="form-control" name="semester" id="field_semester" data-cy="semester" formControlName="semester" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_room" jhiTranslate="eduGestGatewayApp.session.room">Room</label>
+          <select class="form-control" id="field_room" data-cy="room" name="room" formControlName="room" [compareWith]="compareRoom">
+            <option [ngValue]="null"></option>
+            @for (roomOption of roomsSharedCollection; track $index) {
+              <option [ngValue]="roomOption">{{ roomOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_subject" jhiTranslate="eduGestGatewayApp.session.subject">Subject</label>
+          <select
+            class="form-control"
+            id="field_subject"
+            data-cy="subject"
+            name="subject"
+            formControlName="subject"
+            [compareWith]="compareSubject"
+          >
+            <option [ngValue]="null"></option>
+            @for (subjectOption of subjectsSharedCollection; track $index) {
+              <option [ngValue]="subjectOption">{{ subjectOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_teacher" jhiTranslate="eduGestGatewayApp.session.teacher">Teacher</label>
+          <select
+            class="form-control"
+            id="field_teacher"
+            data-cy="teacher"
+            name="teacher"
+            formControlName="teacher"
+            [compareWith]="compareTeacher"
+          >
+            <option [ngValue]="null"></option>
+            @for (teacherOption of teachersSharedCollection; track $index) {
+              <option [ngValue]="teacherOption">{{ teacherOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_schoolClass" jhiTranslate="eduGestGatewayApp.session.schoolClass">School Class</label>
+          <select
+            class="form-control"
+            id="field_schoolClass"
+            data-cy="schoolClass"
+            name="schoolClass"
+            formControlName="schoolClass"
+            [compareWith]="compareSchoolClass"
+          >
+            <option [ngValue]="null"></option>
+            @for (schoolClassOption of schoolClassesSharedCollection; track $index) {
+              <option [ngValue]="schoolClassOption">{{ schoolClassOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_timetable" jhiTranslate="eduGestGatewayApp.session.timetable">Timetable</label>
+          <select
+            class="form-control"
+            id="field_timetable"
+            data-cy="timetable"
+            name="timetable"
+            formControlName="timetable"
+            [compareWith]="compareTimetable"
+          >
+            <option [ngValue]="null"></option>
+            @for (timetableOption of timetablesSharedCollection; track $index) {
+              <option [ngValue]="timetableOption">{{ timetableOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

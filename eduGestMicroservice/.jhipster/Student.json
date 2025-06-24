@@ -1,0 +1,58 @@
+{
+  "annotations": {
+    "changelogDate": "20250624003232"
+  },
+  "applications": ["eduGestGateway", "eduGestMicroservice"],
+  "clientRootFolder": "eduGestMicroservice",
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "identifier",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "birthDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "Genders",
+      "fieldValues": "MALE,FEMALE"
+    },
+    {
+      "fieldName": "nationality",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    }
+  ],
+  "microserviceName": "eduGestMicroservice",
+  "name": "Student",
+  "relationships": [
+    {
+      "otherEntityName": "schoolClass",
+      "relationshipName": "schoolClass",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "parent",
+      "otherEntityRelationshipName": "students",
+      "relationshipName": "parents",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

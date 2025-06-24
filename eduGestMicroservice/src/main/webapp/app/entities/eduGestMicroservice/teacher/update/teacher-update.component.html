@@ -1,0 +1,188 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    <form name="editForm" novalidate (ngSubmit)="save()" [formGroup]="editForm">
+      <h2
+        id="jhi-teacher-heading"
+        data-cy="TeacherCreateUpdateHeading"
+        jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.home.createOrEditLabel"
+      >
+        Create or edit a Teacher
+      </h2>
+
+      <div>
+        <jhi-alert-error />
+
+        @if (editForm.controls.id.value !== null) {
+          <div class="mb-3">
+            <label class="form-label" for="field_id" jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.id">ID</label>
+            <input type="number" class="form-control" name="id" id="field_id" data-cy="id" formControlName="id" [readonly]="true" />
+          </div>
+        }
+
+        @let identifierRef = editForm.get('identifier')!;
+        <div class="mb-3">
+          <label class="form-label" for="field_identifier" jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.identifier"
+            >Identifier</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="identifier"
+            id="field_identifier"
+            data-cy="identifier"
+            formControlName="identifier"
+          />
+          @if (identifierRef.invalid && (identifierRef.dirty || identifierRef.touched)) {
+            <div>
+              @if (editForm.get('identifier')?.errors?.required) {
+                <small class="form-text text-danger" jhiTranslate="entity.validation.required">This field is required.</small>
+              }
+            </div>
+          }
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_birthDate" jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.birthDate"
+            >Birth Date</label
+          >
+          <div class="input-group">
+            <input
+              id="field_birthDate"
+              data-cy="birthDate"
+              type="text"
+              class="form-control"
+              name="birthDate"
+              ngbDatepicker
+              #birthDateDp="ngbDatepicker"
+              formControlName="birthDate"
+            />
+            <button type="button" class="btn btn-secondary" (click)="birthDateDp.toggle()"><fa-icon icon="calendar-alt"></fa-icon></button>
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_qualification" jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.qualification"
+            >Qualification</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="qualification"
+            id="field_qualification"
+            data-cy="qualification"
+            formControlName="qualification"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_gender" jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.gender"
+            >Gender</label
+          >
+          <select class="form-control" name="gender" formControlName="gender" id="field_gender" data-cy="gender">
+            <option [ngValue]="null">{{ 'eduGestMicroserviceApp.Genders.null' | translate }}</option>
+            @for (genders of gendersValues; track $index) {
+              <option [value]="genders">{{ 'eduGestMicroserviceApp.Genders.' + genders | translate }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_experience" jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.experience"
+            >Experience</label
+          >
+          <input
+            type="number"
+            class="form-control"
+            name="experience"
+            id="field_experience"
+            data-cy="experience"
+            formControlName="experience"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_phoneNumber" jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.phoneNumber"
+            >Phone Number</label
+          >
+          <input
+            type="text"
+            class="form-control"
+            name="phoneNumber"
+            id="field_phoneNumber"
+            data-cy="phoneNumber"
+            formControlName="phoneNumber"
+          />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_address" jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.address"
+            >Address</label
+          >
+          <input type="text" class="form-control" name="address" id="field_address" data-cy="address" formControlName="address" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_type" jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.type">Type</label>
+          <input type="text" class="form-control" name="type" id="field_type" data-cy="type" formControlName="type" />
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label" for="field_note" jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.note">Note</label>
+          <input type="text" class="form-control" name="note" id="field_note" data-cy="note" formControlName="note" />
+        </div>
+
+        <div class="mb-3">
+          <label for="field_subjects" jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.subjects">Subjects</label>
+          <select
+            class="form-control"
+            id="field_subjects"
+            data-cy="subjects"
+            multiple
+            name="subjects"
+            formControlName="subjects"
+            [compareWith]="compareSubject"
+          >
+            @for (subjectOption of subjectsSharedCollection; track $index) {
+              <option [ngValue]="subjectOption">{{ subjectOption.id }}</option>
+            }
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="field_schoolClasses" jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.schoolClasses"
+            >School Classes</label
+          >
+          <select
+            class="form-control"
+            id="field_schoolClasses"
+            data-cy="schoolClasses"
+            multiple
+            name="schoolClasses"
+            formControlName="schoolClasses"
+            [compareWith]="compareSchoolClass"
+          >
+            @for (schoolClassOption of schoolClassesSharedCollection; track $index) {
+              <option [ngValue]="schoolClassOption">{{ schoolClassOption.id }}</option>
+            }
+          </select>
+        </div>
+      </div>
+
+      <div>
+        <button type="button" id="cancel-save" data-cy="entityCreateCancelButton" class="btn btn-secondary" (click)="previousState()">
+          <fa-icon icon="ban"></fa-icon>&nbsp;<span jhiTranslate="entity.action.cancel">Cancel</span>
+        </button>
+
+        <button
+          type="submit"
+          id="save-entity"
+          data-cy="entityCreateSaveButton"
+          [disabled]="editForm.invalid || isSaving"
+          class="btn btn-primary"
+        >
+          <fa-icon icon="save"></fa-icon>&nbsp;<span jhiTranslate="entity.action.save">Save</span>
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

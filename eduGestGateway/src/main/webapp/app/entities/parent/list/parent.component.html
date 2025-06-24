@@ -1,0 +1,140 @@
+<div>
+  <h2 id="page-heading" data-cy="ParentHeading">
+    <span jhiTranslate="eduGestGatewayApp.parent.home.title">Parents</span>
+
+    <div class="d-flex justify-content-end">
+      <button class="btn btn-info me-2" (click)="load()" [disabled]="isLoading">
+        <fa-icon icon="sync" [animation]="isLoading ? 'spin' : undefined"></fa-icon>
+        <span jhiTranslate="eduGestGatewayApp.parent.home.refreshListLabel">Refresh list</span>
+      </button>
+
+      <button
+        id="jh-create-entity"
+        data-cy="entityCreateButton"
+        class="btn btn-primary jh-create-entity create-parent"
+        [routerLink]="['/parent/new']"
+      >
+        <fa-icon icon="plus"></fa-icon>
+        <span jhiTranslate="eduGestGatewayApp.parent.home.createLabel">Create a new Parent</span>
+      </button>
+    </div>
+  </h2>
+
+  <jhi-alert-error />
+
+  <jhi-alert />
+
+  @if (parents().length === 0) {
+    <div class="alert alert-warning" id="no-result">
+      <span jhiTranslate="eduGestGatewayApp.parent.home.notFound">No Parents found</span>
+    </div>
+  } @else {
+    <div class="table-responsive table-entities" id="entities">
+      <table class="table table-striped" aria-describedby="page-heading">
+        <thead>
+          <tr jhiSort [(sortState)]="sortState" (sortChange)="navigateToWithComponentValues($event)">
+            <th scope="col" jhiSortBy="id">
+              <div class="d-flex">
+                <span jhiTranslate="global.field.id">ID</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="identifier">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.parent.identifier">Identifier</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="birthDate">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.parent.birthDate">Birth Date</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="gender">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.parent.gender">Gender</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="phoneNumber">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.parent.phoneNumber">Phone Number</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="address">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.parent.address">Address</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="note">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.parent.note">Note</span>
+
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col" jhiSortBy="students.id">
+              <div class="d-flex">
+                <span jhiTranslate="eduGestGatewayApp.parent.students">Students</span>
+                <fa-icon class="p-1" icon="sort"></fa-icon>
+              </div>
+            </th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          @for (parent of parents(); track trackId(parent)) {
+            <tr data-cy="entityTable">
+              <td>
+                <a [routerLink]="['/parent', parent.id, 'view']">{{ parent.id }}</a>
+              </td>
+              <td>{{ parent.identifier }}</td>
+              <td>{{ parent.birthDate | formatMediumDate }}</td>
+              <td [jhiTranslate]="'eduGestGatewayApp.Genders.' + (parent.gender ?? 'null')">
+                {{ { null: '', MALE: 'MALE', FEMALE: 'FEMALE' }[parent.gender ?? 'null'] }}
+              </td>
+              <td>{{ parent.phoneNumber }}</td>
+              <td>{{ parent.address }}</td>
+              <td>{{ parent.note }}</td>
+              <td>
+                @for (students of parent.students; track $index; let last = $last) {
+                  <span>
+                    <a class="form-control-static" [routerLink]="['/student', students.id, 'view']">{{ students.id }}</a
+                    >{{ last ? '' : ', ' }}
+                  </span>
+                }
+              </td>
+              <td class="text-end">
+                <div class="btn-group">
+                  <a [routerLink]="['/parent', parent.id, 'view']" class="btn btn-info btn-sm" data-cy="entityDetailsButton">
+                    <fa-icon icon="eye"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                  </a>
+
+                  <a [routerLink]="['/parent', parent.id, 'edit']" class="btn btn-primary btn-sm" data-cy="entityEditButton">
+                    <fa-icon icon="pencil-alt"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                  </a>
+
+                  <button type="submit" (click)="delete(parent)" class="btn btn-danger btn-sm" data-cy="entityDeleteButton">
+                    <fa-icon icon="times"></fa-icon>
+                    <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                  </button>
+                </div>
+              </td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+  }
+</div>

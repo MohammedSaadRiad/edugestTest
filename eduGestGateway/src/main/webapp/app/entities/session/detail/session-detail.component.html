@@ -1,0 +1,86 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (session(); as sessionRef) {
+      <div>
+        <h2 data-cy="sessionDetailsHeading"><span jhiTranslate="eduGestGatewayApp.session.detail.title">Session</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ sessionRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.session.day">Day</span></dt>
+          <dd>
+            <span>{{ sessionRef.day }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.session.startTime">Start Time</span></dt>
+          <dd>
+            <span>{{ sessionRef.startTime }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.session.endTime">End Time</span></dt>
+          <dd>
+            <span>{{ sessionRef.endTime }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.session.semester">Semester</span></dt>
+          <dd>
+            <span>{{ sessionRef.semester }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.session.room">Room</span></dt>
+          <dd>
+            @if (session()!.room) {
+              <div>
+                <a [routerLink]="['/room', session()!.room?.id, 'view']">{{ sessionRef.room?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.session.subject">Subject</span></dt>
+          <dd>
+            @if (session()!.subject) {
+              <div>
+                <a [routerLink]="['/subject', session()!.subject?.id, 'view']">{{ sessionRef.subject?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.session.teacher">Teacher</span></dt>
+          <dd>
+            @if (session()!.teacher) {
+              <div>
+                <a [routerLink]="['/teacher', session()!.teacher?.id, 'view']">{{ sessionRef.teacher?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.session.schoolClass">School Class</span></dt>
+          <dd>
+            @if (session()!.schoolClass) {
+              <div>
+                <a [routerLink]="['/school-class', session()!.schoolClass?.id, 'view']">{{ sessionRef.schoolClass?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.session.timetable">Timetable</span></dt>
+          <dd>
+            @if (session()!.timetable) {
+              <div>
+                <a [routerLink]="['/timetable', session()!.timetable?.id, 'view']">{{ sessionRef.timetable?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/session', sessionRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

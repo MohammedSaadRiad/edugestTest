@@ -1,0 +1,41 @@
+{
+  "annotations": {
+    "changelogDate": "20250624003632"
+  },
+  "applications": ["eduGestGateway", "eduGestMicroservice"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "code",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "description",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Subject",
+  "relationships": [
+    {
+      "otherEntityName": "schoolClass",
+      "otherEntityRelationshipName": "subjects",
+      "relationshipName": "schoolClasses",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "teacher",
+      "otherEntityRelationshipName": "subjects",
+      "relationshipName": "teachers",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

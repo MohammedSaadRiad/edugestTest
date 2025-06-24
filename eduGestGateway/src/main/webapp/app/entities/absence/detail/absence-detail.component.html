@@ -1,0 +1,58 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (absence(); as absenceRef) {
+      <div>
+        <h2 data-cy="absenceDetailsHeading"><span jhiTranslate="eduGestGatewayApp.absence.detail.title">Absence</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ absenceRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.absence.date">Date</span></dt>
+          <dd>
+            <span>{{ absenceRef.date | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.absence.justification">Justification</span></dt>
+          <dd>
+            <span>{{ absenceRef.justification }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.absence.note">Note</span></dt>
+          <dd>
+            <span>{{ absenceRef.note }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.absence.student">Student</span></dt>
+          <dd>
+            @if (absence()!.student) {
+              <div>
+                <a [routerLink]="['/student', absence()!.student?.id, 'view']">{{ absenceRef.student?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.absence.session">Session</span></dt>
+          <dd>
+            @if (absence()!.session) {
+              <div>
+                <a [routerLink]="['/session', absence()!.session?.id, 'view']">{{ absenceRef.session?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/absence', absenceRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20250624003532"
+  },
+  "applications": ["eduGestGateway", "eduGestMicroservice"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "identifier",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "birthDate",
+      "fieldType": "LocalDate"
+    },
+    {
+      "fieldName": "gender",
+      "fieldType": "Genders",
+      "fieldValues": "MALE,FEMALE"
+    },
+    {
+      "fieldName": "phoneNumber",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "address",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "type",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "note",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Administration",
+  "relationships": [],
+  "searchEngine": "no"
+}

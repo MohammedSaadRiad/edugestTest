@@ -1,0 +1,88 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (teacher(); as teacherRef) {
+      <div>
+        <h2 data-cy="teacherDetailsHeading">
+          <span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.detail.title">Teacher</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ teacherRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.identifier">Identifier</span></dt>
+          <dd>
+            <span>{{ teacherRef.identifier }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.birthDate">Birth Date</span></dt>
+          <dd>
+            <span>{{ teacherRef.birthDate | formatMediumDate }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.qualification">Qualification</span></dt>
+          <dd>
+            <span>{{ teacherRef.qualification }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.gender">Gender</span></dt>
+          <dd>
+            <span [jhiTranslate]="'eduGestMicroserviceApp.Genders.' + (teacherRef.gender ?? 'null')">{{
+              { null: '', MALE: 'MALE', FEMALE: 'FEMALE' }[teacherRef.gender ?? 'null']
+            }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.experience">Experience</span></dt>
+          <dd>
+            <span>{{ teacherRef.experience }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.phoneNumber">Phone Number</span></dt>
+          <dd>
+            <span>{{ teacherRef.phoneNumber }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.address">Address</span></dt>
+          <dd>
+            <span>{{ teacherRef.address }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.type">Type</span></dt>
+          <dd>
+            <span>{{ teacherRef.type }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.note">Note</span></dt>
+          <dd>
+            <span>{{ teacherRef.note }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.subjects">Subjects</span></dt>
+          <dd>
+            @for (subjects of teacherRef.subjects; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/edugestmicroservice/subject', subjects.id, 'view']">{{ subjects?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceTeacher.schoolClasses">School Classes</span></dt>
+          <dd>
+            @for (schoolClasses of teacherRef.schoolClasses; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/edugestmicroservice/school-class', schoolClasses.id, 'view']">{{ schoolClasses?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/edugestmicroservice/teacher', teacherRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

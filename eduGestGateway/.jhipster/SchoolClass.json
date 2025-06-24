@@ -1,0 +1,42 @@
+{
+  "annotations": {
+    "changelogDate": "20250624003732"
+  },
+  "applications": ["eduGestGateway", "eduGestMicroservice"],
+  "databaseType": "sql",
+  "fields": [
+    {
+      "fieldName": "name",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "year",
+      "fieldType": "Integer"
+    }
+  ],
+  "name": "SchoolClass",
+  "relationships": [
+    {
+      "otherEntityName": "timetable",
+      "relationshipName": "timetable",
+      "relationshipSide": "left",
+      "relationshipType": "one-to-one"
+    },
+    {
+      "otherEntityName": "teacher",
+      "otherEntityRelationshipName": "schoolClasses",
+      "relationshipName": "teachers",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-many"
+    },
+    {
+      "otherEntityName": "subject",
+      "otherEntityRelationshipName": "schoolClasses",
+      "relationshipName": "subjects",
+      "relationshipSide": "right",
+      "relationshipType": "many-to-many"
+    }
+  ],
+  "searchEngine": "no"
+}

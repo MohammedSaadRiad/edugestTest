@@ -1,0 +1,52 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (grades(); as gradesRef) {
+      <div>
+        <h2 data-cy="gradesDetailsHeading">
+          <span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceGrades.detail.title">Grades</span>
+        </h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ gradesRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceGrades.grade">Grade</span></dt>
+          <dd>
+            <span>{{ gradesRef.grade }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceGrades.student">Student</span></dt>
+          <dd>
+            @if (grades()!.student) {
+              <div>
+                <a [routerLink]="['/edugestmicroservice/student', grades()!.student?.id, 'view']">{{ gradesRef.student?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="eduGestMicroserviceApp.eduGestMicroserviceGrades.subject">Subject</span></dt>
+          <dd>
+            @if (grades()!.subject) {
+              <div>
+                <a [routerLink]="['/edugestmicroservice/subject', grades()!.subject?.id, 'view']">{{ gradesRef.subject?.id }}</a>
+              </div>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/edugestmicroservice/grades', gradesRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

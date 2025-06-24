@@ -1,0 +1,36 @@
+{
+  "generator-jhipster": {
+    "applicationIndex": 1,
+    "applicationType": "microservice",
+    "authenticationType": "jwt",
+    "baseName": "eduGestMicroservice",
+    "buildTool": "maven",
+    "clientFramework": "angular",
+    "devDatabaseType": "mysql",
+    "devServerPort": 4201,
+    "entities": [
+      "Student",
+      "Teacher",
+      "Parent",
+      "Administration",
+      "Subject",
+      "SchoolClass",
+      "Room",
+      "Session",
+      "Timetable",
+      "Absence",
+      "Grades"
+    ],
+    "jhipsterVersion": "8.11.0",
+    "jwtSecretKey": "ZjBiMzQ0Mzg0ZGNjY2ViNzYzNGE5YjA1NGJjOTJhZjllZGQyNDY3YWQzZTZkM2VjMWI4ODE4MWFhZjAzOWMyNjBiMWQwZDU3YjkzY2M4NTFkZDE3MDA1ZTE5MmNlOTJhNTAwNGRmMDlmYmVhNTZiZDU0YTE2Yzk5MTYzNTU5YmE=",
+    "languages": ["en"],
+    "lastLiquibaseTimestamp": 1750725752000,
+    "nativeLanguage": "en",
+    "packageName": "com.edugest",
+    "prodDatabaseType": "mysql",
+    "reactive": true,
+    "serverPort": "8081",
+    "serviceDiscoveryType": "eureka",
+    "skipUserManagement": true
+  }
+}

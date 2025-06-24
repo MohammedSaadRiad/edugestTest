@@ -1,0 +1,28 @@
+{
+  "eduGestMicroserviceApp": {
+    "eduGestMicroserviceAbsence": {
+      "home": {
+        "title": "Absences",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Absence",
+        "createOrEditLabel": "Create or edit a Absence",
+        "notFound": "No Absences found"
+      },
+      "created": "A new Absence is created with identifier {{ param }}",
+      "updated": "A Absence is updated with identifier {{ param }}",
+      "deleted": "A Absence is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Absence {{ id }}?"
+      },
+      "detail": {
+        "title": "Absence"
+      },
+      "id": "ID",
+      "date": "Date",
+      "justification": "Justification",
+      "note": "Note",
+      "student": "Student",
+      "session": "Session"
+    }
+  }
+}

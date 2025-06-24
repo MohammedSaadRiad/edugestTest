@@ -1,0 +1,64 @@
+<div class="d-flex justify-content-center">
+  <div class="col-8">
+    @if (schoolClass(); as schoolClassRef) {
+      <div>
+        <h2 data-cy="schoolClassDetailsHeading"><span jhiTranslate="eduGestGatewayApp.schoolClass.detail.title">School Class</span></h2>
+
+        <hr />
+
+        <jhi-alert-error />
+
+        <jhi-alert />
+
+        <dl class="row-md jh-entity-details">
+          <dt><span jhiTranslate="global.field.id">ID</span></dt>
+          <dd>
+            <span>{{ schoolClassRef.id }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.schoolClass.name">Name</span></dt>
+          <dd>
+            <span>{{ schoolClassRef.name }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.schoolClass.year">Year</span></dt>
+          <dd>
+            <span>{{ schoolClassRef.year }}</span>
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.schoolClass.timetable">Timetable</span></dt>
+          <dd>
+            @if (schoolClass()!.timetable) {
+              <div>
+                <a [routerLink]="['/timetable', schoolClass()!.timetable?.id, 'view']">{{ schoolClassRef.timetable?.id }}</a>
+              </div>
+            }
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.schoolClass.teachers">Teachers</span></dt>
+          <dd>
+            @for (teachers of schoolClassRef.teachers; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/teacher', teachers.id, 'view']">{{ teachers?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+          <dt><span jhiTranslate="eduGestGatewayApp.schoolClass.subjects">Subjects</span></dt>
+          <dd>
+            @for (subjects of schoolClassRef.subjects; track $index; let last = $last) {
+              <span>
+                <a [routerLink]="['/subject', subjects.id, 'view']">{{ subjects?.id }}</a
+                >{{ last ? '' : ', ' }}
+              </span>
+            }
+          </dd>
+        </dl>
+
+        <button type="submit" (click)="previousState()" class="btn btn-info" data-cy="entityDetailsBackButton">
+          <fa-icon icon="arrow-left"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back">Back</span>
+        </button>
+
+        <button type="button" [routerLink]="['/school-class', schoolClassRef.id, 'edit']" class="btn btn-primary">
+          <fa-icon icon="pencil-alt"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit">Edit</span>
+        </button>
+      </div>
+    }
+  </div>
+</div>

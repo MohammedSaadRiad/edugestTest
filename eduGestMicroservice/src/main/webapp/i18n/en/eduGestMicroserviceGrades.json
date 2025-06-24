@@ -1,0 +1,26 @@
+{
+  "eduGestMicroserviceApp": {
+    "eduGestMicroserviceGrades": {
+      "home": {
+        "title": "Grades",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Grades",
+        "createOrEditLabel": "Create or edit a Grades",
+        "notFound": "No Grades found"
+      },
+      "created": "A new Grades is created with identifier {{ param }}",
+      "updated": "A Grades is updated with identifier {{ param }}",
+      "deleted": "A Grades is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Grades {{ id }}?"
+      },
+      "detail": {
+        "title": "Grades"
+      },
+      "id": "ID",
+      "grade": "Grade",
+      "student": "Student",
+      "subject": "Subject"
+    }
+  }
+}

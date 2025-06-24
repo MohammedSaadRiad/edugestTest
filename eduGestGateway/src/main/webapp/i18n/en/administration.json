@@ -1,0 +1,30 @@
+{
+  "eduGestGatewayApp": {
+    "administration": {
+      "home": {
+        "title": "Administrations",
+        "refreshListLabel": "Refresh list",
+        "createLabel": "Create a new Administration",
+        "createOrEditLabel": "Create or edit a Administration",
+        "notFound": "No Administrations found"
+      },
+      "created": "A new Administration is created with identifier {{ param }}",
+      "updated": "A Administration is updated with identifier {{ param }}",
+      "deleted": "A Administration is deleted with identifier {{ param }}",
+      "delete": {
+        "question": "Are you sure you want to delete Administration {{ id }}?"
+      },
+      "detail": {
+        "title": "Administration"
+      },
+      "id": "ID",
+      "identifier": "Identifier",
+      "birthDate": "Birth Date",
+      "gender": "Gender",
+      "phoneNumber": "Phone Number",
+      "address": "Address",
+      "type": "Type",
+      "note": "Note"
+    }
+  }
+}
